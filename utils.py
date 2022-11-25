@@ -105,7 +105,26 @@ def create_batches(data, labels, batch_size):
              list of tuples of (data batch of batch_size, labels batch of batch_size)
 
     """
+    
+    
     batch_list = []
+    data_labels = np.column_stack((data, labels))#-> [[data1, label1],[data2, label2]....]
+    np.random.shuffle(data_labels) #-> shuffled
+
+    data_shuffled = data_labels[:, :-1] #-> all the rows all columns except last one: [data1, data2,...]
+    labels_shuffled = data_labels[:, -1] #-> all the rows last column: [label1, label2...]
+
+    for i in range(0, data_shuffled.shape[0], batch_size):
+        X_mini = data_shuffled[i:i + batch_size]
+        y_mini = labels_shuffled[i:i + batch_size]
+
+        #[(batch1 = [data1,...,data_batch_size],[label1,...,label_batch_size]),...]
+        batch_list.append((X_mini, y_mini)) #batch_list contains tuples of data and labels lists. each tuple is a batch
+
+    return batch_list
+    
+    
+    """batch_list = []
     cnt=0
     batch_num = -1
     for data, label in zip(data, labels):
@@ -120,7 +139,7 @@ def create_batches(data, labels, batch_size):
         batch_list.insert(batch_num, tup)
         cnt+=1
         cnt = divmod(cnt, 16)
-    return batch_list
+    return batch_list"""
     #raise NotImplementedError("To be implemented")
 
 
