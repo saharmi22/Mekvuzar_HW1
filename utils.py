@@ -89,8 +89,6 @@ def zeros_biases(sizes):
     """
     return np.array([]) + [np.zeros(size) for size in sizes[1:]]
 
-
-#  TODO: fix
 def create_batches(data, labels, batch_size):
     """
          Parameters
