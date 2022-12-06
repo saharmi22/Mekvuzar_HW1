@@ -88,7 +88,7 @@ def zeros_biases(sizes):
              list of zero np arrays bias matrices
 
     """
-    return np.array([]) + [np.zeros(size) for size in sizes[1:]]
+    return np.array([np.zeros(size) for size in sizes[1:]])
 
 def create_batches(data, labels, batch_size):
     """
