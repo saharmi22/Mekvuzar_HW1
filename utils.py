@@ -32,11 +32,12 @@ def sigmoid_prime(x):
 
     """
     return np.array([val - val*val for val in sigmoid(x)])
-    '''
-    prime_sig = sigmoid(x)
-    for idx, item in enumerate(prime_sig):
-        prime_sig[idx] = item*(1-item)
-    return prime_sig'''
+
+
+    #prime_sig = sigmoid(x)
+    #for idx, item in enumerate(prime_sig):
+     #   prime_sig[idx] = item*(1-item)
+    #return prime_sig
 
 
 def random_weights(sizes):
@@ -68,11 +69,11 @@ def zeros_weights(sizes):
     """
     return generate_weights(sizes, 'zeros')
 
-    '''list = []
-    for idx, size in enumerate(sizes):
-        if idx < len(sizes):
-            list.append(np.zeroes((size, sizes[idx+1])))
-    return list'''
+    #list = []
+    #for idx, size in enumerate(sizes):
+     #   if idx < len(sizes):
+      #      list.append(np.zeroes((size, sizes[idx+1])))
+    #return list
 
 
 def zeros_biases(sizes):
@@ -104,7 +105,7 @@ def create_batches(data, labels, batch_size):
 
     """
     
-    
+    assert data.shape == labels.shape
     batch_list = []
     data_labels = np.column_stack((data, labels))#-> [[data1, label1],[data2, label2]....]
     np.random.shuffle(data_labels) #-> shuffled
@@ -153,8 +154,8 @@ def add_elementwise(list1, list2):
          list
              list of sum of each two elements by index
     """
-    assert list1.size == list2.size
-    return [list1[i] + list2[i] for i in range(list1.size)]
+    assert list1.shape == list2.shape
+    return [list1[i] + list2[i] for i in range(list1.shape[0])]
     # return list1 + list2
 
 
